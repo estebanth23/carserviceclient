@@ -4,12 +4,22 @@
     <mat-list>
       <mat-list-item *ngFor="let car of cars">
         <img mat-list-avatar src="{{car.giphyUrl}}" alt="{{car.name}}">
-        <h3 mat-line>
-          <a mat-button [routerLink]="['/car-edit', car.id]">{{car.name}}</a>
-        </h3>
+        <div>
+          <a mat-button *ngIf='car.name!=null' [routerLink]="['/car-edit', car.id]">{{car.name}}</a>
+          <a mat-button *ngIf='car.name==null' [routerLink]="['/car-edit', car.id]" style="color: #ff0000">No Name Car</a>
+          <b>- Owner:   </b>
+          <a>
+            <a mat-button *ngIf='car.nameOwner!="No Name"' [routerLink]="['/owner-edit', car.ownerDni]">
+              {{car.nameOwner}}</a>
+            <span mat-button *ngIf='car.nameOwner =="No Name"' style="color: #ff0000">
+              {{car.nameOwner}}</span>
+          </a>
+        </div>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
-
-  <button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
+  <mat-card-actions>
+  <button mat-raised-button color="primary" [routerLink]="['/car-add']">Add</button>
+  <button mat-raised-button color="warn" [routerLink]="['/owner-list']">Owner List</button>
+</mat-card-actions>
 </mat-card>

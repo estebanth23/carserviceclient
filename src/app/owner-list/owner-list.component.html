@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Owner List</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>        
+            <mat-list-item *ngFor="let owner of owners">
+                <input type="checkbox" id="myCheckbox" (change)='modificateList($event,owner)'><span style="color: #ff0000">Eliminar</span>
+                <h3 mat-line>
+                    <a *ngIf='owner.name!=null'mat-raised-button [routerLink]="['/owner-edit',owner.id]" color="primary"> {{owner.name}}</a>
+                    <a *ngIf='owner.name==null' mat-raised-button [routerLink]="['/owner-edit',owner.id]" color="accent">No Name</a>  
+                </h3>
+                
+                <img mat-list-avatar src="{{owner.giphyUrl}}" alt="{{owner.name}}">
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button> 
+        <button mat-raised-button color ="warn" [disabled]="!flag"(click)="eliminateList()">Eliminate</button> 
+        <button mat-raised-button color="warn" [routerLink]="['/car-list']" type="submit">Back</button>
+    </mat-card-actions>
+</mat-card>
